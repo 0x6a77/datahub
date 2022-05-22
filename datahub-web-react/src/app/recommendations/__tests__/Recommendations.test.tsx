@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import { HomePage } from '../../home/HomePage';
 import { mocks } from '../../../Mocks';
 import TestPageContainer from '../../../utils/test-utils/TestPageContainer';
@@ -50,7 +50,7 @@ describe('Recommendations', () => {
                 }}
             >
                 <TestPageContainer initialEntries={['/search?page=1&query=noresults']}>
-                    <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
+                    <Route path={PageRoutes.SEARCH_RESULTS} element={ <SearchPage />} />
                 </TestPageContainer>
             </MockedProvider>,
         );

@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
 import { EntityType } from '../../../../../types.generated';
 import useIsLineageMode from '../../../../lineage/utils/useIsLineageMode';

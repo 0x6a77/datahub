@@ -1,6 +1,6 @@
 import { Button, List, Space, Typography } from 'antd';
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { DownstreamEntityRelationships, EntityType, UpstreamEntityRelationships } from '../../../../types.generated';
 import { navigateToLineageUrl } from '../../../lineage/utils/navigateToLineageUrl';
@@ -19,7 +19,7 @@ const ViewRawButtonContainer = styled.div`
 
 export default function Lineage({ upstreamLineage, downstreamLineage }: Props) {
     const entityRegistry = useEntityRegistry();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const upstreamEntities = upstreamLineage?.entities?.map((entityRelationship) => entityRelationship?.entity);
     const downstreamEntities = downstreamLineage?.entities?.map((entityRelationship) => entityRelationship?.entity);
@@ -28,7 +28,7 @@ export default function Lineage({ upstreamLineage, downstreamLineage }: Props) {
         <>
             <div>
                 <ViewRawButtonContainer>
-                    <Button onClick={() => navigateToLineageUrl({ location, history, isLineageMode: true })}>
+                    <Button onClick={() => navigateToLineageUrl({ location, navigate, isLineageMode: true })}>
                         View Graph
                     </Button>
                 </ViewRawButtonContainer>

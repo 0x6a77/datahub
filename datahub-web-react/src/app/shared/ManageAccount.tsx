@@ -85,7 +85,7 @@ export const ManageAccount = ({ urn: _urn, pictureLink: _pictureLink, name }: Pr
 
     return (
         <Dropdown overlay={menu}>
-            <Link to={`/${entityRegistry.getPathName(EntityType.CorpUser)}/${_urn}`}>
+            <Link to={`${entityRegistry.getPathName(EntityType.CorpUser)}/${_urn}`}>
                 <CustomAvatar photoUrl={_pictureLink} style={{ marginRight: 5 }} name={name} />
                 <DownArrow />
             </Link>

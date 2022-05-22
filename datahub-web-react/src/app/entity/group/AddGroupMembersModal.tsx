@@ -115,7 +115,7 @@ export const AddGroupMembersModal = ({ urn, visible, onClose, onSubmit }: Props)
                 <Link
                     target="_blank"
                     rel="noopener noreferrer"
-                    to={() => `/${entityRegistry.getPathName(result.entity.type)}/${result.entity.urn}`}
+                    to={`${entityRegistry.getPathName(result.entity.type)}/${result.entity.urn}`}
                 >
                     View
                 </Link>{' '}

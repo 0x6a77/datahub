@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 
 import TagProfile from '../TagProfile';
 import TestPageContainer from '../../../../utils/test-utils/TestPageContainer';
@@ -12,7 +12,7 @@ describe('TagProfile', () => {
         const { getByText, queryByText } = render(
             <MockedProvider mocks={mocks} addTypename={false}>
                 <TestPageContainer initialEntries={['/tag/urn:li:tag:abc-sample-tag']}>
-                    <Route path="/tag/:urn" render={() => <TagProfile />} />
+                    <Route path="/tag/:urn" element={ <TagProfile />} />
                 </TestPageContainer>
             </MockedProvider>,
         );
@@ -34,7 +34,7 @@ describe('TagProfile', () => {
                 }}
             >
                 <TestPageContainer initialEntries={['/tag/urn:li:tag:abc-sample-tag']}>
-                    <Route path="/tag/:urn" render={() => <TagProfile />} />
+                    <Route path="/tag/:urn" element={ <TagProfile />} />
                 </TestPageContainer>
             </MockedProvider>,
         );
@@ -46,7 +46,7 @@ describe('TagProfile', () => {
         const { queryByText } = render(
             <MockedProvider mocks={mocks} addTypename={false}>
                 <TestPageContainer initialEntries={['/tag/urn:li:tag:abc-sample-tag']}>
-                    <Route path="/tag/:urn" render={() => <TagProfile />} />
+                    <Route path="/tag/:urn" element={ <TagProfile />} />
                 </TestPageContainer>
             </MockedProvider>,
         );

@@ -1,6 +1,6 @@
 import { Button, Tag } from 'antd';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { EntityType, FacetFilterInput, RecommendationContent, SearchParams } from '../../../../types.generated';
 import { navigateToSearchUrl } from '../../../search/utils/navigateToSearchUrl';
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const SearchQueryList = ({ content, onClick }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const queryParams = content
         .map((cnt) => cnt.params?.searchParams)
@@ -39,7 +39,7 @@ export const SearchQueryList = ({ content, onClick }: Props) => {
             query,
             type: (types && types.length > 0 && types[0]) || undefined,
             filters: filters || [],
-            history,
+            navigate,
         });
     };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Message } from '../../shared/Message';
@@ -25,7 +25,7 @@ type TagPageParams = {
  */
 export default function TagProfile() {
     const { urn: encodedUrn } = useParams<TagPageParams>();
-    const urn = decodeUrn(encodedUrn);
+    const urn = decodeUrn(encodedUrn ?? 'unknown');
     const { loading } = useGetTagQuery({ variables: { urn } });
 
     return (

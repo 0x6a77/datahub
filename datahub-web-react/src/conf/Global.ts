@@ -7,7 +7,7 @@ export enum PageRoutes {
      */
     AUTHENTICATE = '/authenticate',
     LOG_IN = '/login',
-    SEARCH_RESULTS = '/search/:type?',
+    SEARCH_RESULTS = '/search/:type',
     SEARCH = '/search',
     BROWSE = '/browse',
     BROWSE_RESULTS = '/browse/:type',
@@ -15,7 +15,7 @@ export enum PageRoutes {
     ASSETS = '/assets',
     ANALYTICS = '/analytics',
     POLICIES = '/policies',
-    IDENTITIES = '/identities',
+    IDENTITIES = '/identities/*',
     INGESTION = '/ingestion',
     SETTINGS = '/settings',
     DOMAINS = '/domains',

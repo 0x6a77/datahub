@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, useHistory, useLocation, useParams } from 'react-router';
+import { Navigate, useNavigate, useLocation, useParams } from 'react-router-dom';
 import * as QueryString from 'query-string';
 import { Affix, Alert } from 'antd';
 import { BrowseCfg } from '../../conf';
@@ -17,14 +17,14 @@ type BrowseResultsPageParams = {
 
 export const BrowseResultsPage = () => {
     const location = useLocation();
-    const history = useHistory();
-    const { type } = useParams<BrowseResultsPageParams>();
+    const navigate = useNavigate();
+    const entType = useParams<BrowseResultsPageParams>().type ?? 'unknown';
 
     const entityRegistry = useEntityRegistry();
 
     const rootPath = location.pathname;
     const params = QueryString.parse(location.search);
-    const entityType = entityRegistry.getTypeFromPathName(type);
+    const entityType = entityRegistry.getTypeFromPathName(entType);
     const path = rootPath.split('/').slice(3);
     const page: number = params.page && Number(params.page as string) > 0 ? Number(params.page as string) : 1;
 
@@ -45,14 +45,14 @@ export const BrowseResultsPage = () => {
     }
 
     const onChangePage = (newPage: number) => {
-        history.push({
+        navigate({
             pathname: rootPath,
             search: `&page=${newPage}`,
         });
     };
 
     if (page < 0 || page === undefined || Number.isNaN(page)) {
-        return <Redirect to={`${PageRoutes.BROWSE}`} />;
+        return <Navigate to={`${PageRoutes.BROWSE}`} />;
     }
 
     return (

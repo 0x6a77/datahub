@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { EntityType, RecommendationContent, Tag } from '../../../../types.generated';
 import { StyledTag } from '../../../entity/shared/components/styled/StyledTag';
@@ -30,7 +30,7 @@ type Props = {
 };
 
 export const TagSearchList = ({ content, onClick }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
 
     const tags: Array<Tag> = content
@@ -47,7 +47,7 @@ export const TagSearchList = ({ content, onClick }: Props) => {
                     value: tag.urn,
                 },
             ],
-            history,
+            navigate,
         });
     };
 

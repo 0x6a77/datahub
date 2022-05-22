@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Input, AutoComplete, Image, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { AutoCompleteResultForEntity, CorpUser, Entity, EntityType, ScenarioType, Tag } from '../../types.generated';
 import { IconStyleType } from '../entity/Entity';
 import EntityRegistry from '../entity/EntityRegistry';
@@ -182,7 +182,7 @@ export const SearchBar = ({
     autoCompleteStyle,
     fixAutoComplete,
 }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState<string>();
     const [selected, setSelected] = useState<string>();
     const searchEntityTypes = entityRegistry.getSearchEntityTypes();
@@ -267,7 +267,7 @@ export const SearchBar = ({
                         );
                     } else {
                         // Navigate directly to the entity profile.
-                        history.push(getEntityPath(option.type, value, entityRegistry, false));
+                        navigate(getEntityPath(option.type, value, entityRegistry, false));
                     }
                 }}
                 onSearch={(value: string) => onQueryChange(value)}

@@ -1,4 +1,4 @@
-import { RouteComponentProps } from 'react-router';
+import { NavigateFunction } from 'react-router-dom';
 import * as QueryString from 'query-string';
 import { EntityType, FacetFilterInput } from '../../../../../../types.generated';
 import filtersToQueryStringParams from '../../../../../search/utils/filtersToQueryStringParams';
@@ -9,14 +9,14 @@ export const navigateToEntitySearchUrl = ({
     query: newQuery,
     page: newPage = 1,
     filters: newFilters,
-    history,
+    navigate,
 }: {
     baseUrl: string;
     type?: EntityType;
     query?: string;
     page?: number;
     filters?: Array<FacetFilterInput>;
-    history: RouteComponentProps['history'];
+    navigate: NavigateFunction;
 }) => {
     const constructedFilters = newFilters || [];
     if (newType) {
@@ -32,7 +32,7 @@ export const navigateToEntitySearchUrl = ({
         { arrayFormat: 'comma' },
     );
 
-    history.push({
+    navigate({
         pathname: `${baseUrl}`,
         search,
     });

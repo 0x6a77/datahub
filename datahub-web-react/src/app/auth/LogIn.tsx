@@ -4,7 +4,7 @@ import { Input, Button, Form, message, Image } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useReactiveVar } from '@apollo/client';
 import styled, { useTheme } from 'styled-components';
-import { Redirect, useLocation } from 'react-router';
+import { Navigate, useLocation } from 'react-router-dom';
 import styles from './login.module.css';
 import { Message } from '../shared/Message';
 import { isLoggedInVar } from './checkAuthStatus';
@@ -80,7 +80,7 @@ export const LogIn: React.VFC<LogInProps> = () => {
     if (isLoggedIn) {
         const params = QueryString.parse(location.search);
         const maybeRedirectUri = params.redirect_uri;
-        return <Redirect to={(maybeRedirectUri && decodeURIComponent(maybeRedirectUri as string)) || '/'} />;
+        return <Navigate to={(maybeRedirectUri && decodeURIComponent(maybeRedirectUri as string)) || '/'} />;
     }
 
     return (

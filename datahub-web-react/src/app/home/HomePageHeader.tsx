@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Typography, Image, Row, Button, Tag } from 'antd';
 import styled, { useTheme } from 'styled-components';
 
@@ -112,7 +112,7 @@ function sortRandom() {
 }
 
 export const HomePageHeader = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
     const [getAutoCompleteResultsForMultiple, { data: suggestionsData }] = useGetAutoCompleteMultipleResultsLazyQuery();
     const user = useGetAuthenticatedUser()?.corpUser;
@@ -132,7 +132,7 @@ export const HomePageHeader = () => {
         navigateToSearchUrl({
             type,
             query,
-            history,
+            navigate,
         });
     };
 
@@ -229,7 +229,7 @@ export const HomePageHeader = () => {
                                             navigateToSearchUrl({
                                                 type: undefined,
                                                 query: `"${suggestion}"`,
-                                                history,
+                                                navigate,
                                             })
                                         }
                                     >

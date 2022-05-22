@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Popover, Radio, Select, Typography } from 'antd';
 import { CaretDownOutlined, FileTextOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
@@ -158,7 +158,7 @@ export default function SchemaHeader({
     schemaView,
     setSchemaView,
 }: Props) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const onVersionChange = (version1, version2) => {
         if (version1 === null || version2 === null) {
@@ -248,7 +248,7 @@ export default function SchemaHeader({
                             const datasetVersion: string = e as string;
                             navigateToVersionedDatasetUrl({
                                 location,
-                                history,
+                                navigate,
                                 datasetVersion,
                             });
                         }}

@@ -2,7 +2,7 @@ import { Divider, message, Space, Button, Typography, Row, Col } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { EditOutlined, MailOutlined, SlackOutlined } from '@ant-design/icons';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUpdateCorpGroupPropertiesMutation } from '../../../graphql/group.generated';
 import { EntityRelationshipsResult, Ownership } from '../../../types.generated';
 
@@ -81,8 +81,7 @@ export default function GroupInfoSidebar({ sideBarData, refetch }: Props) {
         groupOwnerShip: ownership,
     } = sideBarData;
     const [updateCorpGroupPropertiesMutation] = useUpdateCorpGroupPropertiesMutation();
-    const { url } = useRouteMatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     /* eslint-disable @typescript-eslint/no-unused-vars */
     const [editGroupModal, showEditGroupModal] = useState(false);
@@ -168,7 +167,7 @@ export default function GroupInfoSidebar({ sideBarData, refetch }: Props) {
                         <GroupMembersSideBarSection
                             total={groupMemberRelationships?.total || 0}
                             relationships={groupMemberRelationships?.relationships || []}
-                            onSeeMore={() => history.push(`${url}/members`)}
+                            onSeeMore={() => navigate('members')}
                         />
                     </GroupsSection>
                 </SideBarSubSection>

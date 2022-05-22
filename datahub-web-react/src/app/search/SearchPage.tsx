@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as QueryString from 'query-string';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Alert } from 'antd';
 
 import { SearchablePage } from './SearchablePage';
@@ -23,7 +23,7 @@ type SearchPageParams = {
  * A search results page.
  */
 export const SearchPage = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
 
     const entityRegistry = useEntityRegistry();
@@ -90,15 +90,15 @@ export const SearchPage = () => {
             pageNumber: 1,
             originPath: window.location.pathname,
         });
-        navigateToSearchUrl({ type: type || activeType, query: q, page: 1, history });
+        navigateToSearchUrl({ type: type || activeType, query: q, page: 1, navigate });
     };
 
     const onChangeFilters = (newFilters: Array<FacetFilterInput>) => {
-        navigateToSearchUrl({ type: activeType, query, page: 1, filters: newFilters, history });
+        navigateToSearchUrl({ type: activeType, query, page: 1, filters: newFilters, navigate });
     };
 
     const onChangePage = (newPage: number) => {
-        navigateToSearchUrl({ type: activeType, query, page: newPage, filters, history });
+        navigateToSearchUrl({ type: activeType, query, page: newPage, filters, navigate });
     };
 
     return (

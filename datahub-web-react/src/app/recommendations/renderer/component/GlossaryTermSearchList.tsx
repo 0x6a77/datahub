@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BookOutlined } from '@ant-design/icons';
 import { Button, Tag } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RecommendationContent, GlossaryTerm } from '../../../../types.generated';
 import { navigateToSearchUrl } from '../../../search/utils/navigateToSearchUrl';
 
@@ -38,7 +38,7 @@ type Props = {
 };
 
 export const GlossaryTermSearchList = ({ content, onClick }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const terms: Array<GlossaryTerm> = content
         .map((cnt) => cnt.entity)
@@ -54,7 +54,7 @@ export const GlossaryTermSearchList = ({ content, onClick }: Props) => {
                     value: term.urn,
                 },
             ],
-            history,
+            navigate,
         });
     };
 

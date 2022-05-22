@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Button } from 'antd';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { BarsOutlined, PartitionOutlined } from '@ant-design/icons';
 import { VscGraphLeft } from 'react-icons/vsc';
 import styled from 'styled-components';
@@ -20,15 +20,15 @@ const ImpactAnalysisIcon = styled(VscGraphLeft)`
 
 export const LineageTab = () => {
     const { urn, entityType } = useEntityData();
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
     const lineage = useLineageData();
     const [showImpactAnalysis, setShowImpactAnalysis] = useState(false);
     const appConfig = useAppConfig();
 
     const routeToLineage = useCallback(() => {
-        history.push(getEntityPath(entityType, urn, entityRegistry, true));
-    }, [history, entityType, urn, entityRegistry]);
+        navigate(getEntityPath(entityType, urn, entityRegistry, true));
+    }, [navigate, entityType, urn, entityRegistry]);
 
     const upstreamEntities = lineage?.upstreamChildren?.map((result) => result.entity);
     const downstreamEntities = lineage?.downstreamChildren?.map((result) => result.entity);

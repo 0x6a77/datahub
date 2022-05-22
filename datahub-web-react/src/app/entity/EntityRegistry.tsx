@@ -79,7 +79,7 @@ export default class EntityRegistry {
     }
 
     getEntityUrl(type: EntityType, urn: string): string {
-        return `/${this.getPathName(type)}/${urlEncodeUrn(urn)}`;
+        return `${this.getPathName(type)}/${urlEncodeUrn(urn)}`;
     }
 
     getTypeFromPathName(pathName: string): EntityType {

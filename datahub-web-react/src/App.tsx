@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
 import { message } from 'antd';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache, ServerError } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { ThemeProvider } from 'styled-components';
 import './App.less';
-import { Routes } from './app/Routes';
+import { AppRoutes } from './app/AppRoutes';
 import EntityRegistry from './app/entity/EntityRegistry';
 import { DashboardEntity } from './app/entity/dashboard/DashboardEntity';
 import { ChartEntity } from './app/entity/chart/ChartEntity';
@@ -102,13 +102,13 @@ const App: React.VFC = () => {
 
     return (
         <ThemeProvider theme={dynamicThemeConfig}>
-            <Router>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <EntityRegistryContext.Provider value={entityRegistry}>
                     <ApolloProvider client={client}>
-                        <Routes />
+                        <AppRoutes />
                     </ApolloProvider>
                 </EntityRegistryContext.Provider>
-            </Router>
+            </BrowserRouter>
         </ThemeProvider>
     );
 };

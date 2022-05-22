@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { grey } from '@ant-design/colors';
 import { Alert, Button, Divider, message, Typography } from 'antd';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { ApolloError } from '@apollo/client';
 import styled from 'styled-components';
 import { ChromePicker } from 'react-color';
@@ -165,7 +165,7 @@ const generateColor = new ColorHash({
  * Responsible for displaying metadata about a tag
  */
 export default function TagStyleEntity({ urn, useGetSearchResults = useWrappedSearchResults }: Props) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
     const { loading, error, data, refetch } = useGetTagQuery({ variables: { urn } });
     const [updateDescription] = useUpdateDescriptionMutation();
@@ -359,7 +359,7 @@ export default function TagStyleEntity({ urn, useGetSearchResults = useWrappedSe
                                                     aggregation?.value === EntityType.Dataset
                                                         ? entityAndSchemaQuery
                                                         : entityQuery,
-                                                history,
+                                                navigate,
                                             })
                                         }
                                         type="link"

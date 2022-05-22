@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { BrowseResultsPage } from './browse/BrowseResultsPage';
 import { EntityPage } from './entity/EntityPage';
@@ -24,24 +24,24 @@ export const ProtectedRoutes = (): JSX.Element => {
         <AppConfigProvider>
             <Layout style={{ height: '100%', width: '100%' }}>
                 <Layout>
-                    <Switch>
-                        <Route exact path="/" render={() => <HomePage />} />
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
                         {entityRegistry.getEntities().map((entity) => (
                             <Route
                                 key={entity.getPathName()}
-                                path={`/${entity.getPathName()}/:urn`}
-                                render={() => <EntityPage entityType={entity.type} />}
+                                path={`${entity.getPathName()}/urn`}
+                                element={<EntityPage entityType={entity.type} />}
                             />
                         ))}
-                        <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
-                        <Route path={PageRoutes.BROWSE_RESULTS} render={() => <BrowseResultsPage />} />
-                        <Route path={PageRoutes.ANALYTICS} render={() => <AnalyticsPage />} />
-                        <Route path={PageRoutes.POLICIES} render={() => <PoliciesPage />} />
-                        <Route path={PageRoutes.IDENTITIES} render={() => <ManageIdentitiesPage />} />
-                        <Route path={PageRoutes.DOMAINS} render={() => <ManageDomainsPage />} />
-                        <Route path={PageRoutes.INGESTION} render={() => <ManageIngestionPage />} />
-                        <Route path={PageRoutes.SETTINGS} render={() => <SettingsPage />} />
-                    </Switch>
+                        <Route path={PageRoutes.SEARCH_RESULTS} element={<SearchPage />} />
+                        <Route path={PageRoutes.BROWSE_RESULTS} element={<BrowseResultsPage />} />
+                        <Route path={PageRoutes.ANALYTICS} element={<AnalyticsPage />} />
+                        <Route path={PageRoutes.POLICIES} element={<PoliciesPage />} />
+                        <Route path={PageRoutes.IDENTITIES} element={<ManageIdentitiesPage />} />
+                        <Route path={PageRoutes.DOMAINS} element={<ManageDomainsPage />} />
+                        <Route path={PageRoutes.INGESTION} element={<ManageIngestionPage />} />
+                        <Route path={PageRoutes.SETTINGS} element={<SettingsPage />} />
+                    </Routes>
                 </Layout>
             </Layout>
         </AppConfigProvider>

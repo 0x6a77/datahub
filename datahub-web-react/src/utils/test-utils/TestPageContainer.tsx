@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import { CLIENT_AUTH_COOKIE } from '../../conf/Global';

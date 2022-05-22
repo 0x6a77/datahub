@@ -14,9 +14,9 @@ import { useGetGrantedPrivilegesQuery } from '../../graphql/policy.generated';
 import { Message } from '../shared/Message';
 import { UnauthorizedPage } from '../authorization/UnauthorizedPage';
 
-interface RouteParams {
+type RouteParams = {
     urn: string;
-}
+};
 
 interface Props {
     entityType: EntityType;
@@ -27,7 +27,7 @@ interface Props {
  */
 export const EntityPage = ({ entityType }: Props) => {
     const { urn: encodedUrn } = useParams<RouteParams>();
-    const urn = decodeUrn(encodedUrn);
+    const urn = decodeUrn(encodedUrn ?? 'unknown');
     const entityRegistry = useEntityRegistry();
     const entity = entityRegistry.getEntity(entityType);
     const isBrowsable = entity.isBrowseEnabled();

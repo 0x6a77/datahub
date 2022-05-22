@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Table } from 'antd';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { Cell, EntityType, FacetFilterInput, TableChart as TableChartType } from '../../../types.generated';
 import { navigateToSearchUrl } from '../../search/utils/navigateToSearchUrl';
@@ -31,14 +31,14 @@ const TableLink = styled(Button)`
 `;
 
 const TableCell = ({ cell }: TableCellProps) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
     const onClickQuery = (query: string, types: Array<EntityType>, filters: Array<FacetFilterInput>) => {
         navigateToSearchUrl({
             query,
             type: (types && types.length > 0 && types[0]) || undefined,
             filters: filters || [],
-            history,
+            navigate,
         });
     };
 

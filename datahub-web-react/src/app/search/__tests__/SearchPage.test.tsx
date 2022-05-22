@@ -2,7 +2,7 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 
 import { SearchPage } from '../SearchPage';
 import TestPageContainer from '../../../utils/test-utils/TestPageContainer';
@@ -17,7 +17,7 @@ describe('SearchPage', () => {
                 <TestPageContainer
                     initialEntries={['/search?filter_entity=DATASET&filter_platform=hive,kafka&page=1&query=sample']}
                 >
-                    <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
+                    <Route path={PageRoutes.SEARCH_RESULTS} element={ <SearchPage />} />
                 </TestPageContainer>
             </MockedProvider>,
         );
@@ -39,7 +39,7 @@ describe('SearchPage', () => {
                 <TestPageContainer
                     initialEntries={['/search?filter_entity=DATASET&filter_platform=kafka&page=1&query=test']}
                 >
-                    <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
+                    <Route path={PageRoutes.SEARCH_RESULTS} element={ <SearchPage />} />
                 </TestPageContainer>
             </MockedProvider>,
         );
@@ -71,7 +71,7 @@ describe('SearchPage', () => {
                 <TestPageContainer
                     initialEntries={['/search?filter_entity=DATASET&filter_platform=kafka,hdfs&page=1&query=test']}
                 >
-                    <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
+                    <Route path={PageRoutes.SEARCH_RESULTS} element={ <SearchPage />} />
                 </TestPageContainer>
             </MockedProvider>,
         );
@@ -103,7 +103,7 @@ describe('SearchPage', () => {
                 <TestPageContainer
                     initialEntries={['/search?filter_entity=DATASET&filter_platform=kafka&page=1&query=test']}
                 >
-                    <Route path={PageRoutes.SEARCH_RESULTS} render={() => <SearchPage />} />
+                    <Route path={PageRoutes.SEARCH_RESULTS} element={ <SearchPage />} />
                 </TestPageContainer>
             </MockedProvider>,
         );

@@ -170,7 +170,7 @@ export default function Documentation({
             title: 'Author',
             dataIndex: 'author',
             render: (user: CorpUser) => (
-                <Link to={`/${entityRegistry.getPathName(EntityType.CorpUser)}/${user.urn}`}>{user.username}</Link>
+                <Link to={`${entityRegistry.getPathName(EntityType.CorpUser)}/${user.urn}`}>{user.username}</Link>
             ),
         },
         {

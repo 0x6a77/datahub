@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import * as QueryString from 'query-string';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useSearchAcrossLineageQuery } from '../../../../../graphql/search.generated';

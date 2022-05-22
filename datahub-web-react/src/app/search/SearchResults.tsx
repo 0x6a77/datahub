@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Divider, Empty, List, ListProps, Pagination, Typography } from 'antd';
 import styled from 'styled-components';
 import { RocketOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Message } from '../shared/Message';
 import {
     Entity,
@@ -169,7 +169,7 @@ export const SearchResults = ({
         onChangeFilters(newFilters);
     };
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -219,7 +219,7 @@ export const SearchResults = ({
                                                 />
                                                 <Button
                                                     onClick={() =>
-                                                        navigateToSearchUrl({ query: '*', page: 0, history })
+                                                        navigateToSearchUrl({ query: '*', page: 0, navigate })
                                                     }
                                                 >
                                                     <RocketOutlined /> Explore your metadata

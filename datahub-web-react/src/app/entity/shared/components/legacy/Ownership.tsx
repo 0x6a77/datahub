@@ -210,7 +210,7 @@ export const Ownership: React.FC<Props> = ({ owners, lastModifiedAt, updateOwner
                         key={record.urn}
                         placement="left"
                         name={record.fullName}
-                        url={`/${entityRegistry.getPathName(record.type)}/${record.urn}`}
+                        url={`${entityRegistry.getPathName(record.type)}/${record.urn}`}
                         photoUrl={record.pictureLink}
                         style={{ marginRight: '15px' }}
                         isGroup={record.type === EntityType.CorpGroup}

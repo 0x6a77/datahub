@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Breadcrumb, Row } from 'antd';
 import styled from 'styled-components';
 import { IconBaseProps } from 'react-icons/lib';
@@ -60,7 +60,7 @@ const BrowseRow = styled(Row)`
  */
 export const LegacyBrowsePath = ({ type, path, lineageSupported, isProfilePage, isBrowsable }: Props) => {
     const entityRegistry = useEntityRegistry();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const isLineageMode = useIsLineageMode();
 
@@ -97,12 +97,12 @@ export const LegacyBrowsePath = ({ type, path, lineageSupported, isProfilePage, 
                     <HoverableVscPreview
                         isSelected={!isLineageMode}
                         size={26}
-                        onClick={() => navigateToLineageUrl({ location, history, isLineageMode: false })}
+                        onClick={() => navigateToLineageUrl({ location, navigate, isLineageMode: false })}
                     />
                     <HoverableVscRepoForked
                         size={26}
                         isSelected={isLineageMode}
-                        onClick={() => navigateToLineageUrl({ location, history, isLineageMode: true })}
+                        onClick={() => navigateToLineageUrl({ location, navigate, isLineageMode: true })}
                     />
                 </LineageIconGroup>
             )}

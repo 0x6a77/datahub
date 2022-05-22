@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Badge, Breadcrumb, Row } from 'antd';
 import styled from 'styled-components';
 import { InfoCircleOutlined, PartitionOutlined } from '@ant-design/icons';
@@ -98,7 +98,7 @@ export const ProfileNavBrowsePath = ({
     breadcrumbLinksEnabled,
 }: Props): JSX.Element => {
     const entityRegistry = useEntityRegistry();
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const isLineageMode = useIsLineageMode();
 
@@ -136,7 +136,7 @@ export const ProfileNavBrowsePath = ({
             <Breadcrumb style={{ fontSize: '16px' }} separator=">">
                 <BreadcrumbItem disabled={!breadcrumbLinksEnabled}>
                     {breadcrumbLinksEnabled ? (
-                        <Link to={breadcrumbLinksEnabled ? baseBrowsePath : undefined}>
+                        <Link to={breadcrumbLinksEnabled ? baseBrowsePath : ''}>
                             {entityRegistry.getCollectionName(type)}
                         </Link>
                     ) : (
@@ -152,7 +152,7 @@ export const ProfileNavBrowsePath = ({
                         isSelected={!isLineageMode}
                         onClick={() => {
                             if (hasLineage) {
-                                navigateToLineageUrl({ location, history, isLineageMode: false });
+                                navigateToLineageUrl({ location, navigate, isLineageMode: false });
                             }
                         }}
                     >
@@ -164,7 +164,7 @@ export const ProfileNavBrowsePath = ({
                         isSelected={isLineageMode}
                         onClick={() => {
                             if (hasLineage) {
-                                navigateToLineageUrl({ location, history, isLineageMode: true });
+                                navigateToLineageUrl({ location, navigate, isLineageMode: true });
                             }
                         }}
                     >

@@ -2,7 +2,7 @@ import { ArrowRightOutlined } from '@ant-design/icons';
 import { Button, Card, Divider, List, Space, Typography } from 'antd';
 import { ListProps } from 'antd/lib/list';
 import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { EntityType, SearchResult } from '../../types.generated';
 import { IconStyleType } from '../entity/Entity';
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export const EntityGroupSearchResults = ({ type, query, searchResults }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
 
     const onResultClick = (result: SearchResult, index: number) => {
@@ -70,7 +70,7 @@ export const EntityGroupSearchResults = ({ type, query, searchResults }: Props) 
                                     type,
                                     query,
                                     page: 0,
-                                    history,
+                                    navigate,
                                 })
                             }
                         >

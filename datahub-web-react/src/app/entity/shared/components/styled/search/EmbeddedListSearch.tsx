@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as QueryString from 'query-string';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import styled from 'styled-components';
 import { ApolloError } from '@apollo/client';
@@ -72,7 +72,7 @@ export const EmbeddedListSearch = ({
     placeholderText,
     useGetSearchResults = useWrappedSearchResults,
 }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const entityRegistry = useEntityRegistry();
 
@@ -127,7 +127,7 @@ export const EmbeddedListSearch = ({
             type: activeType,
             query: finalQuery,
             page: 1,
-            history,
+            navigate,
         });
     };
 
@@ -138,7 +138,7 @@ export const EmbeddedListSearch = ({
             query,
             page: 1,
             filters: newFilters,
-            history,
+            navigate,
         });
     };
 
@@ -149,7 +149,7 @@ export const EmbeddedListSearch = ({
             query,
             page: newPage,
             filters,
-            history,
+            navigate,
         });
     };
 

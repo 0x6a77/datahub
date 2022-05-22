@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Tooltip, Typography } from 'antd';
 import { ScanOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
@@ -41,7 +41,7 @@ const SchemaBlameBlameButton = styled(Button)`
 `;
 
 export default function useSchemaBlameRenderer(schemaBlameList?: Array<SchemaFieldBlame> | null) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const schemaBlameRenderer = (record: SchemaField) => {
         const relevantSchemaFieldBlame = schemaBlameList?.find((candidateSchemaBlame) =>
@@ -73,7 +73,7 @@ export default function useSchemaBlameRenderer(schemaBlameList?: Array<SchemaFie
                                     onClick={() => {
                                         navigateToVersionedDatasetUrl({
                                             location,
-                                            history,
+                                            navigate,
                                             datasetVersion:
                                                 relevantSchemaFieldBlame.schemaFieldChange.lastSemanticVersion,
                                         });

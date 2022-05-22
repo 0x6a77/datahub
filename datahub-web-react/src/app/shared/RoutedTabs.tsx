@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Route, Switch, useRouteMatch, useLocation } from 'react-router-dom';
-import { Redirect, useHistory } from 'react-router';
+import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-dom';
 import { Tabs } from 'antd';
 import { TabsProps } from 'antd/lib/tabs';
 
@@ -24,9 +23,8 @@ interface Props extends TabsProps {
  * This permits direct navigation to a particular tab via URL.
  */
 export const RoutedTabs = ({ defaultPath, tabs, onTabChange, ...props }: Props) => {
-    const { path, url } = useRouteMatch();
     const { pathname } = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const subRoutes = tabs.map((tab) => tab.path.replace('/', ''));
     const trimmedPathName = pathname.endsWith('/') ? pathname.slice(0, pathname.length - 1) : pathname;
     const splitPathName = trimmedPathName.split('/');
@@ -39,7 +37,7 @@ export const RoutedTabs = ({ defaultPath, tabs, onTabChange, ...props }: Props) 
                 activeKey={activePath}
                 size="large"
                 onTabClick={(tab: string) => onTabChange && onTabChange(tab)}
-                onChange={(newPath) => history.push(`${url}/${newPath}`)}
+                onChange={(newPath) => navigate(`${newPath}`)}
                 {...props}
             >
                 {tabs.map((tab) => {
@@ -48,20 +46,16 @@ export const RoutedTabs = ({ defaultPath, tabs, onTabChange, ...props }: Props) 
                     );
                 })}
             </Tabs>
-            <Switch>
-                <Route exact path={path}>
-                    <Redirect to={`${pathname}${pathname.endsWith('/') ? '' : '/'}${defaultPath}`} />
-                </Route>
+            <Routes>
+                <Route
+                    index
+                    element={<Navigate to={`${pathname}${pathname.endsWith('/') ? '' : '/'}${defaultPath}`} replace />}
+                />
 
                 {tabs.map((tab) => (
-                    <Route
-                        exact
-                        path={`${path}/${tab.path.replace('/', '')}`}
-                        render={() => tab.content}
-                        key={tab.path}
-                    />
+                    <Route path={`${tab.path.replace('/', '')}`} element={tab.content} key={tab.path} />
                 ))}
-            </Switch>
+            </Routes>
         </div>
     );
 };

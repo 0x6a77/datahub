@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { Alert, Divider } from 'antd';
 import { MutationHookOptions, MutationTuple, QueryHookOptions, QueryResult } from '@apollo/client/react/types/types';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { EntityType, Exact } from '../../../../../types.generated';
 import { Message } from '../../../../shared/Message';
 import { getDataForEntityType, getEntityPath, useRoutedTab } from './utils';
@@ -129,7 +129,7 @@ export const EntityProfile = <T, U>({
 }: Props<T, U>): JSX.Element => {
     const isLineageMode = useIsLineageMode();
     const entityRegistry = useEntityRegistry();
-    const history = useHistory();
+    const navigate = useNavigate();
     const isCompact = React.useContext(CompactContext);
     const tabsWithDefaults = tabs.map((tab) => ({ ...tab, display: { ...defaultTabDisplayConfig, ...tab.display } }));
     const sideBarSectionsWithDefaults = sidebarSections.map((sidebarSection) => ({
@@ -140,24 +140,16 @@ export const EntityProfile = <T, U>({
     const [sidebarWidth, setSidebarWidth] = useState(INITIAL_SIDEBAR_WIDTH);
 
     const routeToTab = useCallback(
-        ({
-            tabName,
-            tabParams,
-            method = 'push',
-        }: {
-            tabName: string;
-            tabParams?: Record<string, any>;
-            method?: 'push' | 'replace';
-        }) => {
+        ({ tabName, tabParams }: { tabName: string; tabParams?: Record<string, any> }) => {
             analytics.event({
                 type: EventType.EntitySectionViewEvent,
                 entityType,
                 entityUrn: urn,
                 section: tabName.toLowerCase(),
             });
-            history[method](getEntityPath(entityType, urn, entityRegistry, false, tabName, tabParams));
+            navigate(getEntityPath(entityType, urn, entityRegistry, false, tabName, tabParams));
         },
-        [history, entityType, urn, entityRegistry],
+        [navigate, entityType, urn, entityRegistry],
     );
 
     const { loading, error, data, refetch } = useEntityQuery({

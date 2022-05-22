@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 
 import { SearchHeader } from './SearchHeader';
@@ -36,7 +36,7 @@ const defaultProps = {
  * A page that includes a sticky search header (nav bar)
  */
 export const SearchablePage = ({ initialQuery, onSearch, onAutoComplete, children }: Props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const entityRegistry = useEntityRegistry();
     const themeConfig = useTheme();
 
@@ -57,7 +57,7 @@ export const SearchablePage = ({ initialQuery, onSearch, onAutoComplete, childre
         navigateToSearchUrl({
             type,
             query,
-            history,
+            navigate,
         });
     };
 

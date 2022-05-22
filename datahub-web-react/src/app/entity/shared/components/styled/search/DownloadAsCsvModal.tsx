@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Input, Modal } from 'antd';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 import { EntityType, FacetFilterInput, SearchAcrossEntitiesInput } from '../../../../../../types.generated';
 import { SearchResultsInterface } from './types';

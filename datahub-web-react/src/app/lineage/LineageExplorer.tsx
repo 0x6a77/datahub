@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router';
 
 import { Alert, Button, Drawer } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
+import { useNavigate } from 'react-router-dom';
 import { Message } from '../shared/Message';
 import { useEntityRegistry } from '../useEntityRegistry';
 import CompactContext from '../shared/CompactContext';
@@ -53,7 +53,7 @@ type Props = {
 
 export default function LineageExplorer({ urn, type }: Props) {
     const previousUrn = usePrevious(urn);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const entityRegistry = useEntityRegistry();
 
@@ -120,9 +120,7 @@ export default function LineageExplorer({ urn, type }: Props) {
                             setSelectedEntity(params);
                         }}
                         onEntityCenter={(params: EntitySelectParams) => {
-                            history.push(
-                                `${entityRegistry.getEntityUrl(params.type, params.urn)}/?is_lineage_mode=true`,
-                            );
+                            navigate(`${entityRegistry.getEntityUrl(params.type, params.urn)}/?is_lineage_mode=true`);
                         }}
                         onLineageExpand={(params: LineageExpandParams) => {
                             getAsyncEntity(params.urn, params.type);

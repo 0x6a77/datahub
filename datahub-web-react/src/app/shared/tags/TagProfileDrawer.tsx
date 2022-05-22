@@ -33,7 +33,7 @@ export const TagProfileDrawer = ({ closeTagProfileDrawer, tagProfileDrawerVisibl
                             </Button>
                         </Space>
                         <Space>
-                            <Button href={`/tag/${urn}`}>
+                            <Button href={`tag/${urn}`}>
                                 <InfoCircleOutlined /> Tag Details
                             </Button>
                         </Space>
