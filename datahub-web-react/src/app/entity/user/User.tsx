@@ -39,7 +39,7 @@ export class UserEntity implements Entity<CorpUser> {
 
     getAutoCompleteFieldName = () => 'username';
 
-    getPathName: () => string = () => 'user';
+    getPathName: () => string = () => '/users/user';
 
     getEntityName = () => 'Person';
 

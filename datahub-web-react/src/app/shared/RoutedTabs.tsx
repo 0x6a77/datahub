@@ -30,14 +30,22 @@ export const RoutedTabs = ({ defaultPath, tabs, onTabChange, ...props }: Props) 
     const splitPathName = trimmedPathName.split('/');
     const providedPath = splitPathName[splitPathName.length - 1];
     const activePath = subRoutes.includes(providedPath) ? providedPath : defaultPath.replace('/', '');
+    const isBasePath: boolean = subRoutes.filter((value) => pathname.includes(value)).length === 0;
     return (
         <div>
+            {
+                // because react-route v6 can't substring match datahub paths, we have to do some magic
+                // FIXME?
+                isBasePath === true && (
+                    <Navigate to={`${pathname}${pathname.endsWith('/') ? '' : '/'}${defaultPath}`} replace />
+                )
+            }
             <Tabs
                 defaultActiveKey={activePath}
                 activeKey={activePath}
                 size="large"
                 onTabClick={(tab: string) => onTabChange && onTabChange(tab)}
-                onChange={(newPath) => navigate(`${newPath}`)}
+                onChange={(newPath) => navigate(`${pathname.substr(0, pathname.lastIndexOf('/'))}/${newPath}`)}
                 {...props}
             >
                 {tabs.map((tab) => {
@@ -47,11 +55,6 @@ export const RoutedTabs = ({ defaultPath, tabs, onTabChange, ...props }: Props) 
                 })}
             </Tabs>
             <Routes>
-                <Route
-                    index
-                    element={<Navigate to={`${pathname}${pathname.endsWith('/') ? '' : '/'}${defaultPath}`} replace />}
-                />
-
                 {tabs.map((tab) => (
                     <Route path={`${tab.path.replace('/', '')}`} element={tab.content} key={tab.path} />
                 ))}
