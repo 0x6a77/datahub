@@ -15,7 +15,7 @@ import { Message } from '../shared/Message';
 import { UnauthorizedPage } from '../authorization/UnauthorizedPage';
 
 type RouteParams = {
-    urn: string;
+    '*': string;
 };
 
 interface Props {
@@ -26,7 +26,7 @@ interface Props {
  * Responsible for rendering an Entity Profile
  */
 export const EntityPage = ({ entityType }: Props) => {
-    const { urn: encodedUrn } = useParams<RouteParams>();
+    const { '*': encodedUrn } = useParams<RouteParams>();
     const urn = decodeUrn(encodedUrn ?? 'unknown');
     const entityRegistry = useEntityRegistry();
     const entity = entityRegistry.getEntity(entityType);

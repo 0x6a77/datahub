@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 type UserPageParams = {
-    urn: string;
+    '*': string;
 };
 
 const SUBVIEW_PATH_INDEX = 3;
@@ -11,7 +11,7 @@ const ITEM_PATH_INDEX = 4;
 
 export default function useUserParams(): { subview?: string; item?: string; urn: string } {
     const location = useLocation();
-    const urn = useParams<UserPageParams>().urn ?? 'uknown';
+    const urn = useParams<UserPageParams>()['*'] ?? 'uknown';
     return useMemo(() => {
         const parts = location.pathname.split('/');
         const subview = parts[SUBVIEW_PATH_INDEX];

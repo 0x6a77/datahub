@@ -29,7 +29,7 @@ export const ProtectedRoutes = (): JSX.Element => {
                         {entityRegistry.getEntities().map((entity) => (
                             <Route
                                 key={entity.getPathName()}
-                                path={`${entity.getPathName()}/urn`}
+                                path={`${entity.getPathName()}/*`}
                                 element={<EntityPage entityType={entity.type} />}
                             />
                         ))}
